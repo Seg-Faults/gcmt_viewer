@@ -1,0 +1,17 @@
+{
+  "name": "gcmt_viewer",
+  "version": "0.1.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "author": "github.com/seg-fault",
+  "license": "ISC",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "eslint": "^3.0.1",
+    "nodemon": "^1.10.0"
+  }
+}
