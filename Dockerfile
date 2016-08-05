@@ -1,4 +1,4 @@
-FROM node:6.2.2
+FROM node:6
 
 RUN mkdir /app
 WORKDIR /app
@@ -9,5 +9,6 @@ RUN npm install
 COPY . /app
 
 EXPOSE 3000
+EXPOSE 27017
 
 CMD ["npm", "start"]
