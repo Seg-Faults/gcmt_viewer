@@ -9,7 +9,8 @@
   "author": "github.com/seg-fault",
   "license": "CC0 1.0 Universal",
   "dependencies": {
-    "mongo": "^0.1.0"
+    "mongo": "^0.1.0",
+    "mongoose": "^4.5.8"
   },
   "devDependencies": {
     "eslint": "^3.0.1",
