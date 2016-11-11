@@ -3,7 +3,7 @@
 L.mapbox.accessToken = "pk.eyJ1IjoiY29zc2F0b3QiLCJhIjoiVGJyMGU5cyJ9.CMKdx74guBSUyyC-L1fAoA";
 
 var map = L.mapbox.map("map", "mapbox.streets-satellite", {
-    minZoom: 5,
+    //minZoom: 5,
     tileLayer: {
         continuousWorld: false,
         noWrap: true
@@ -25,14 +25,11 @@ map.on("moveend", () => {
 });
 
 function addMarkersToMap(map) {
-  // TODO: should these be linked with $.when ?
-  // evaluate for concurrency issues!
   addBeachballsToMap(map);
   addFaultlinesToMap(map);
 }
 
 function addBeachballsToMap(map) {
-  //beachballs.clearLayers();
   $.when(getQuakesFromDB(map)).done((quakes) => {
     var newBeachballs = L.mapbox.featureLayer();
     quakes.forEach((quake) => {
@@ -42,7 +39,7 @@ function addBeachballsToMap(map) {
            quake.geometry.coordinates[0]],
           {icon: L.icon(quake.properties.icon)}
         ).bindPopup(quake.properties.title)
-      )
+      );
     });
     map.removeLayer(beachballs);
     beachballs = newBeachballs;
@@ -51,15 +48,14 @@ function addBeachballsToMap(map) {
 }
 
 function addFaultlinesToMap(map) {
-  //faultlines.clearLayers();
   $.when(getFaultsFromDB(map)).done((faults) => {
     var newFaultlines = L.mapbox.featureLayer();
     faults.forEach((fault) => {
       newFaultlines.addLayer(
         L.geoJson(
-          fault, 
-          {color: "red", 
-          weight: 1.5, 
+          fault,
+          {color: "red",
+          weight: 1.5,
           opacity: 1}
         )
       );
@@ -100,10 +96,13 @@ function getFaultsFromDB(map) {
 
 function getBboxCoords(map) {
   var currentBbox = map.getBounds();
-  return [[
-    [currentBbox._southWest.lng, currentBbox._southWest.lat],
-    [currentBbox._southWest.lng, currentBbox._northEast.lat],
-    [currentBbox._northEast.lng, currentBbox._northEast.lat],
-    [currentBbox._northEast.lng, currentBbox._southWest.lat],
-    [currentBbox._southWest.lng, currentBbox._southWest.lat]]];
+  var northeast = currentBbox.getNorthEast().wrap();
+  var southwest = currentBbox.getSouthWest().wrap();
+  var coordsArray = [[
+    [southwest.lng, southwest.lat],
+    [southwest.lng, northeast.lat],
+    [northeast.lng, northeast.lat],
+    [northeast.lng, southwest.lat],
+    [southwest.lng, southwest.lat]]];
+  return coordsArray;
 }
