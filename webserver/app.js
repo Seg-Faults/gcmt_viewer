@@ -8,7 +8,7 @@ var path = require("path");
 var bodyParser = require("body-parser");
 
 var app = express();
-//var accessLogStream = fs.createWriteStream(path.join(__dirname, "log/access.log"), {flags: "a"});
+
 var logDirectory = path.join(__dirname, "log");
 fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
 var accessLogStream = FileStreamRotator.getStream({
