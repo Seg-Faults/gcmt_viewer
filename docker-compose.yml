@@ -9,6 +9,8 @@ services:
       - mongo
     environment:
       MONGODB_URI: "mongodb://mongo:27017/gcmt_dev"
+    volumes:
+      - /Users/x3ko/Desktop:/app/log
 
   mongo-seed:
     build: ./mongo-seed

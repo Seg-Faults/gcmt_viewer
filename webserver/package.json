@@ -11,8 +11,10 @@
   "dependencies": {
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
+    "file-stream-rotator": "0.0.7",
     "fs": "0.0.2",
-    "mongodb": "^2.2.5"
+    "mongodb": "^2.2.5",
+    "morgan": "^1.7.0"
   },
   "devDependencies": {
     "eslint": "^3.0.1",
