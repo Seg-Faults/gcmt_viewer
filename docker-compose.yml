@@ -10,7 +10,7 @@ services:
     environment:
       MONGODB_URI: "mongodb://mongo:27017/gcmt_dev"
     volumes:
-      - /Users/x3ko/Desktop:/app/log
+      - /home/ec2-user:/app/log
 
   mongo-seed:
     build: ./mongo-seed
